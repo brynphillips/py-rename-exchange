@@ -18,6 +18,7 @@ static PyObject* _rename_exchange(PyObject* self, PyObject* args) {
 
   if (syscall(SYS_renameat2, AT_FDCWD, path1_char, AT_FDCWD, path2_char,
               RENAME_EXCHANGE)) {
+    perror(NULL);
     return 1;
   };
 
