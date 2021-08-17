@@ -9,22 +9,20 @@ static PyObject* _hello_world(PyObject* self) {
 static PyObject* _rename_exchange(PyObject* self, PyObject* args) {
   char* path1_char = NULL;
   char* path2_char = NULL;
-  if (!PyArg_ParseTuple(args, "s|s", &path1_char, &path2_char)) {
-    Py_DECREF(args);
-    return NULL;
-    //&& syscall(renameat2, AT_FWD, path1, AT_FWD, path2, RENAME_EXCHANGE) fix
-    // this
-  };
-
-  if (syscall(SYS_renameat2, AT_FDCWD, path1_char, AT_FDCWD, path2_char,
+  if (!PyArg_ParseTuple(args, "s|s", &path1_char, &path2_char) &&
+      syscall(SYS_renameat2, AT_FDCWD, path1_char, AT_FDCWD, path2_char,
               RENAME_EXCHANGE)) {
     perror(NULL);
     return 1;
   };
 
-  PyObject* ret =
-      PyUnicode_FromFormat("path1: %s, path2: %s", path1_char, path2_char);
-  return ret;
+  /*
+if (syscall(SYS_renameat2, AT_FDCWD, path1_char, AT_FDCWD, path2_char,
+            RENAME_EXCHANGE)) {
+  perror(NULL);
+  return 1;
+};
+  */
 }
 
 static PyObject* _to_upper_hello(PyObject* self, PyObject* args) {
