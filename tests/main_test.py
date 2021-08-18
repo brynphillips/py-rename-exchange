@@ -18,9 +18,14 @@ def test_directory_replace(tmpdir):
     b = tmpdir.mkdir('sub2')
     b.join('file2.txt').write('file2')
 
-    # str1, str2 = str(a), str(b)
-
     _py_rename_exchange(str(a), str(b))
 
     assert os.path.isfile(f'{tmpdir}/sub1/file2.txt')
     assert os.path.isfile(f'{tmpdir}/sub2/file1.txt')
+
+# def test_missing_directory(tmpdir, capsys):
+#     a = tmpdir.mkdir('sub1')
+#     a.join('file1.txt').write('file1')
+#     b = ''
+#
+#     out, err = capsys.readouterr()
