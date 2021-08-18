@@ -3,7 +3,6 @@ from typing import Optional
 from typing import Sequence
 
 from _rename_exchange import rename_exchange
-# import sys
 
 
 def _py_rename_exchange(path1: str, path2: str) -> None:
