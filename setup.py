@@ -26,4 +26,5 @@ setup(
             define_macros=[('Py_LIMITED_API', None)],
         ),
     ],
+    cmdclass=cmdclass,
 )
