@@ -9,7 +9,6 @@ from _rename_exchange import rename_exchange
 def _py_rename_exchange(path1: str, path2: str) -> None:
     try:
         rename_exchange(path1, path2)
-        print('hello')
     except OSError as exc:
         raise RuntimeError('failed to find directory') from exc
 
