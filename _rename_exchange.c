@@ -12,17 +12,17 @@ static PyObject* _rename_exchange(PyObject* self, PyObject* args) {
 
   if (!syscall(SYS_renameat2, AT_FDCWD, path1_char, AT_FDCWD, path2_char,
                RENAME_EXCHANGE)) {
-    perror(NULL);
-    return 1;
+    return PyUnicode_FromString("Completed Successfully");
   } else {
-    return 0;
+    perror(NULL);
+    return PyUnicode_FromString("Something went wrong");
   };
 }
 
 static struct PyMethodDef methods[] = {
     {"rename_exchange", (PyCFunction)_rename_exchange, METH_VARARGS,
      "atomically switches two dirs"},
-    {NULL, NULL}};
+    {NULL, NULL, 0, NULL}};
 
 static struct PyModuleDef module = {PyModuleDef_HEAD_INIT, "_rename_exchange",
                                     NULL, -1, methods};
