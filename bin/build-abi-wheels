@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import os
+import pipes
+import subprocess
+import tempfile
+
+
+def check_call(*cmd):
+    print(
+        'build-abi-wheels>> ' +
+        ' '.join(pipes.quote(part) for part in cmd),
+    )
+    subprocess.check_call(cmd)
+
+def main():
+    os.makedirs('dist', exist_ok=True)
+    with tempfile.TemporaryDirectory() as work:
+        pip = '/opt/python/cp36-cp36m/bin/pip'
+        check_call(
+            'podman', 'run', '-ti',
+            '--user', '{}:{}'.format(os.getuid(), os.getgid()),
+            '-v', '{}:/work:rw'.format(work),
+            '-v', '{}:/dist:rw'.format(os.path.abspath('dist')),
+            'quay.io/pypa/manylinux1_x86_64:latest',
+            'bash', '-exc',
+            '{} wheel --verbose --wheel-dir /work --no-deps  && '
+            'auditwheel repair --wheel-dir /dist /work/*.whl'.format(pip),
+
+        )
+    return 0
+
+
+if __name__ == '__main__':
+    SystemExit(main())
