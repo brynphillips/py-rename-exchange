@@ -16,7 +16,7 @@ def check_call(*cmd):
 def main():
     os.makedirs('dist', exist_ok=True)
     with tempfile.TemporaryDirectory() as work:
-        pip = '/opt/python/cp39-cp39/bin/pip'
+        pip = '/opt/python/cp36-cp36m/bin/pip'
         check_call(
             'podman', 'run', '-ti',
             '--user', '{}:{}'.format(os.getuid(), os.getgid()),
