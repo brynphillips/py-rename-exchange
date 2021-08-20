@@ -2,7 +2,6 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <sys/syscall.h>
-#include <unistd.h>
 
 #ifndef RENAME_EXCHANGE
 #define RENAME_EXCHANGE 2
@@ -21,7 +20,7 @@ static PyObject* _rename_exchange(PyObject* self, PyObject* args) {
     return PyUnicode_FromString("Completed Successfully");
   } else {
     perror(NULL);
-    return PyUnicode_FromString("Something went wrong");
+    return PyUnicode_FromString("Please check to see if the directory exists.");
   };
 }
 

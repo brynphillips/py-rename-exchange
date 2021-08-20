@@ -5,11 +5,13 @@ from typing import Sequence
 from _rename_exchange import rename_exchange
 
 
-def _py_rename_exchange(path1: str, path2: str) -> None:
+def _py_rename_exchange(path1: str, path2: str) -> int:
     try:
-        rename_exchange(path1, path2)
+        print(rename_exchange(path1, path2))
+        return 1
     except OSError as exc:
         raise RuntimeError('failed to find directory') from exc
+        return 0
 
 
 def main(argv: Optional[Sequence[str]] = None) -> int:
