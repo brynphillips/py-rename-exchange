@@ -17,7 +17,9 @@ $ pip install .
 
 # usage
 
-`py-rename-exchange-cli path1 path2`
+```console
+py-rename-exchange-cli path1 path2
+```
 
 # build
 
