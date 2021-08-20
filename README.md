@@ -9,11 +9,15 @@ The usage is for atomic directory replacement using RENAME_EXCHANGE.
 
 # install
 
-To utilize this tool download/clone this repo first, then:
+To install this tool download/clone this repo first, then:
 
 ```console
 $ pip install .
 ```
+
+# usage
+
+`py-rename-exchange-cli path1 path2`
 
 # build
 
