@@ -33,6 +33,6 @@ Also included is a testsuite using tox:
 
 ```console
 $ virtualenv venv && . ./venv/bin/activate
-$ pip install -r requirements-dev && pip install .
+$ pip install -r requirements-dev.txt && pip install .
 $ tox
 ```
