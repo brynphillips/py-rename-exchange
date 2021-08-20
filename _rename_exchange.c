@@ -1,6 +1,12 @@
 #include <Python.h>
 #include <fcntl.h>
+#include <stdio.h>
 #include <sys/syscall.h>
+#include <unistd.h>
+
+#ifndef RENAME_EXCHANGE
+#define RENAME_EXCHANGE 2
+#endif
 
 static PyObject* _rename_exchange(PyObject* self, PyObject* args) {
   char* path1_char = NULL;

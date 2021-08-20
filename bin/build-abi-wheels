@@ -16,16 +16,16 @@ def check_call(*cmd):
 def main():
     os.makedirs('dist', exist_ok=True)
     with tempfile.TemporaryDirectory() as work:
-        pip = '/opt/python/cp36-cp36m/bin/pip'
+        pip = '/opt/python/cp39-cp39/bin/pip'
         check_call(
             'podman', 'run', '-ti',
             '--user', '{}:{}'.format(os.getuid(), os.getgid()),
-            '-v', '{}:/work:rw'.format(work),
             '-v', '{}:/dist:rw'.format(os.path.abspath('dist')),
-            'quay.io/pypa/manylinux1_x86_64:latest',
+            '-v', f'{os.getcwd()}:/src:ro',
+            'quay.io/pypa/manylinux2014_x86_64:latest',
             'bash', '-exc',
-            '{} wheel --verbose --wheel-dir /work --no-deps  && '
-            'auditwheel repair --wheel-dir /dist /work/*.whl'.format(pip),
+            '{} wheel --verbose --wheel-dir /tmp --no-deps /src && '
+            'auditwheel repair --wheel-dir /dist /tmp/*.whl'.format(pip),
 
         )
     return 0
